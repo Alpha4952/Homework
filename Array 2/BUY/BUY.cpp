@@ -18,15 +18,15 @@ int main() {
     freopen("BUY.OUT" , "w" , stdout);
 
     cin >> m >> n;
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         cin >> x >> y;
         a[i] = piii(i, pii(x, y));
     }
 
-    sort (a, a + n, cmp);
+    sort (a+1, a + 1 + n, cmp);
     kq = 0; S = 0;
 
-    for (i = 0; i < n; i++) {
+    for (i = 1; i <= n; i++) {
         if (S + a[i].sc.fi > m) break;
         S += a[i].sc.fi;
         kq += a[i].sc.sc * a[i].sc.fi;
@@ -36,7 +36,5 @@ int main() {
     kq += (m - S) * a[i].sc.sc;
     c[a[i].fi] = m - S;
     cout << kq << '\n';
-    for (int i = 0; i < n; i++) cout << c[i] << '\n';
-
-    return 0;
+    for (int i = 1; i <= n; i++) cout << c[i] << '\n';
 }
