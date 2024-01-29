@@ -1,32 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long n, a1[100001][2], a2[100001][2], a3[100001][2], c1, c2, c3, t1, t2;
+int n, f[5], d, r, cur1, cur2;
+pair <int, int> a[100001];
 
 int main () {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	freopen("PHOTO.inp", "r", stdin);
+	freopen("PHOTO.out", "w", stdout);
 
 	cin >> n;
-	for (int i = 0; i < n; i++) {
-		cin >> t1 >> t2;
-		if (t2 == 1) {
-			a1[c1][0] = t1;
-			a1[c1][1] = t2;
-			c1++;
-		}
-		else if (t2 == 2) {
-			a2[c2][0] = t1;
-			a2[c2][1] = t2;
-			c2++;
-		}
-		else {
-			a3[c3][0] = t1;
-			a3[c3][1] = t2;
-			c3++;
+	for (int i = 0; i < n; i++) cin >> a[i].first >> a[i].second;
+
+	cur1 = 0; cur2 = 0; d = 1; r = 999999; f[a[0].second] = 1;
+	while (cur1 <= cur2 && cur2 < n) {
+		if (d < 3) {
+			cur2++;
+			if (f[a[cur2].second] == 0) d++;
+			f[a[cur2].second]++;
+		} else {
+			r = min(r, a[cur2].first - a[cur1].first);
+			if (f[a[cur1].second] == 1) d--;
+			f[a[cur1++].second]--;
 		}
 	}
-
-	for (int i = 0; i < n; i++) {
-
-	}
+	cout << r;
 }
