@@ -14,9 +14,11 @@ for i in range (1, t+1):
 	s = input(); hmm = cpp(s); f = 1;
 	for n in range(len(s)):
 		if hmm[ord(s[n]) - ord('a')] == 1:
-			r += str(n+1) + '\n'
+			#r += str(n+1) + '\n'
+			print(n+1)
 			f = 0
 			break
 	if f:
-			r += '-1\n'
-print(r)
+			#r += '-1\n'
+			print(-1)
+#print(r)
