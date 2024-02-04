@@ -6,6 +6,8 @@ string n;
 
 int main() {
 	std::ios::sync_with_stdio(0), std::cin.tie(0), std::cout.tie(0);
+	freopen("NGOAC.inp", "r", stdin);
+	freopen("NGOAC.out", "w", stdout);
 
 	l = 1;
 	

@@ -13,9 +13,12 @@ int main() {
     for (int i = 0; i < 2; i++) getline(cin, s);
 
     for (int i = 0; i < s.length(); i++) {
-        t = true;
-        for (int j = 0; j < s1.length(); j++) {
-            if (s[i + j] != s1[j]) t = false;
+        t = false;
+        if (s[i] == s1[0]) {
+            t = true;
+            for (int j = 1; j < s1.length(); j++) {
+                if (s[i + j] != s1[j]) t = false;
+            }
         }
         if (t) {
             cout << s2;
