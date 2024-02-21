@@ -8,11 +8,13 @@ vector <string> s;
 string its (int n) { // has no problem running
 	string r = "";
 	int a[10], c = 0;
+
 	while (n > 0) {
 		a[c] = n % 10;
 		n /= 10;
 		c++;
 	}
+
 	for (int i = c-1; i >= 0; i--) {
 		if (a[i] == 0) r += "0";
 		else if (a[i] == 1) r += "1";
@@ -36,6 +38,7 @@ int main () {
 	c = 0; s.push_back("0"); s.push_back("0");
 	while (cin >> a[c]) c++;
 	sort(a, a+c); //no problem occured
+
 	for (int i = 2; i <= a[c-1]; i++) {
 		temp = i; temp2 = 2; ts = "";
 		while (temp > 1) {
@@ -48,6 +51,7 @@ int main () {
 		for (int j = 0; j <= i; j++) if (f[j] != 0) ts += its(f[j]) + " ";
 		s.push_back(ts);
 	}
+	
 	for (int i = 0; i < c; i++) {
 		cout << s[a[i]] << '\n';
 	}
