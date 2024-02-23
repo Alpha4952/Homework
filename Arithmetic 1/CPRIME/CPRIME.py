@@ -17,7 +17,7 @@ def pri(n: int):
 			return False
 	return True
 
-if str(n)[0] == 0:
+if n < 0:
 	print(0)
 elif pri(n) == False:
 	print(0)
