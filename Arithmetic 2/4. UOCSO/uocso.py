@@ -9,10 +9,12 @@ for j in range(t):
     m = int(a[1])
     
     mn = m*n
-    c = 1
+    c = 0
 
     lim = int(math.sqrt(mn))+1
-    for i in range(2, lim):
+    for i in range(1, lim):
         if mn%i == 0:
-            c++
-            if (mn/i != i) c++
+            c += 1
+            if (mn/i != i):
+                c += 1
+    print(c)
