@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long n, a[1000001], lim, c, t;
+long long n, a[10000001], lim, c, t;
 
-bool pri (long long n) {
+bool pri (int n) {
 	if (n < 2) return false;
-	if (n < 4) return false;
-	if (n%2 == 0) return false;
-	for (int i = 3; i*i <= n; i += 2) if (n%i == 0) return false;
+	if (n < 4) return true;
+	if (n % 2 == 0) return false;
+	for (int i = 3; i*i <= n; i+=2) if (n % i == 0) return false;
 	return true;
 }
 
@@ -22,6 +22,14 @@ int main () {
 		cout << 0;
 		return 1;
 	}
+	if (n == 1) {
+		cout << 1;
+		return 1;
+	}
+	if (pri(n)) {
+		cout << 1;
+		return 1;
+	}
 
 	lim = sqrt(n)+1;
 
@@ -31,22 +39,12 @@ int main () {
 
 		for (long long j = i*i; j <= lim; j += i) a[j] = 1;
 	}
-
-	for (int i = 1; i <= lim; i++) {
-		if (a[i] == 0) {
-			if (n%i == 0) {
-				t = n/i;
-				if (pri(t) == false) c++;
-			}
-			continue;
-		}
-		
+	
+	c = 2;
+	for (int i = 2; i < n; i++) {
 		if (n%i == 0) {
-			c++;
-			t = n/i;
-			if (n%(t) == 0 && t != i) {
-				if (pri(t) == false) c++;
-			}
+			if (a[i])c++;
+			if (pri(n/i) == false) c++;
 		}
 	}
 	cout << c;
