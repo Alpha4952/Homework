@@ -5,8 +5,8 @@ int arr[101][101], m, n, mode, i, j, c, t, d, l, r;
 
 int main () {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	freopen("XOAYOC.inp", "r", stdin);
-	freopen("XOAYOC.out", "w", stdout);
+	freopen("MTXOAYOC.inp", "r", stdin);
+	freopen("MTXOAYOC.out", "w", stdout);
 
 	cin >> m >> n;
 
