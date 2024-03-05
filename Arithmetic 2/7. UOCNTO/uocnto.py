@@ -2,49 +2,43 @@ import sys, math
 sys.stdin = open('uocnto.inp', 'r')
 sys.stdout = open('uocnto.out', 'w')
 
-def prime ():
-	global pri
-	pri = [0]*1000001
-	pri[0] = 1;	pri[1] = 1
-	for i in range(2, 1001):
-		if pri[i]:
-			continue
-		for j in range(i*i, 1000001, i):
-			pri[j] = 1
-
 def dct (n: int):
 	r = 1
-	lim = int(math.sqrt(int(math.sqrt(n)))) + 1
+	n = int(math.sqrt(n))
+	lim = int(math.sqrt(n)) + 1
 
 	for i in range (2, lim):
 		k = 0
 
-		while lim%i == 0:
+		while n%i == 0:
 			k += 1
-			lim /= i
+			n /= i
 		r *= (2*k + 1)
 
 	if n > 1:
 		r *= 3
 	return r
 
-def wtf ():
-	global c
-	c = [0]*1000001
-	prime()
-	
-	for i in range(2, 1000001):
-		c[i] = c[i-1]
-		if pri[i] == 0:
-			c[i] += 1
-		else:
-			k = int(math.sqrt(i))
-			if k*k == i:
-				d = dct(i)
-				if pri[d] == 0:
-					c[i] += 1
+pri = [0]*1000001
+pri[0] = 1;	pri[1] = 1
+for i in range(2, 1001):
+	if pri[i]:
+		continue
+	for j in range(i*i, 1000001, i):
+		pri[j] = 1
 
-wtf()
+c = [0]*1000001
+
+for i in range(2, 1000001):
+	if pri[i] == 0:
+		c[i] = 1
+	else:
+		k = int(math.sqrt(i))
+		if k*k == i:
+			if pri[dct(i)] == 0:
+				c[i] = 1
+for i in range(2, 1000001):
+	c[i] = c[i-1] + c[i]
 
 t = int(input())
 
