@@ -17,8 +17,10 @@ int main () {
 			cin >> t;
 
 			if (p[t] == 0) continue;
+
 			for (int e = 1; e <= 1000000; e++) {
 				if (p[e+t]) continue;
+
 				c[j] += e;
 				r[i] += e;
 				break;
@@ -29,5 +31,6 @@ int main () {
 	t = 99999;
 	for (int i = 0; i < m; i++) t = min(t, r[i]);
 	for (int i = 0; i < n; i++) t = min(t, c[i]);
+
 	cout << t;
 }
