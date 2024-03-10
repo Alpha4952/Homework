@@ -1,15 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, m, a[501][501], res = -99999, t[501];
+long long n, m, a[501][501], res, t[501];
 
-int heh (int *a){
-	int m = 0, r = 0;
+long long heh (long long *a){
+	long long m = 0, r = res;
 
-	for(int i = 0; i < n; i++){
+	for (long long i = 0; i < n; i++){
 		m += a[i];
 		r = max(r, m);
-		m = max(0, m);
+		m = max(0LL, m);
 	}
 	return r;
 }
@@ -21,13 +21,19 @@ int main () {
 
     cin >> n >> m;
 
-	for (int i = 0; i < n; i++) for (int j = 0; j < m; j++) cin >> a[i][j];
+	for (long long i = 0; i < n; i++) {
+		for (long long j = 0; j < m; j++) {
+			cin >> a[i][j];
+			a[i][j] += a[i][j-1];
+		}
+		res += a[i][m-1];
+	}
 
-	for (int l = 0; l < m; l++){
+	for (long long l = 0; l < m; l++) {
         memset(t, 0, sizeof(t));
 
-		for (int r = l; r < m; r++){
-			for (int i = 0; i < n; i++) t[i] += a[i][r];
+		for (long long i = 0; i < n; i++) {
+			t[i] += a[i][m-1] - a[i][l-1];
 			res = max(res, heh(t));
 		}
 	}
