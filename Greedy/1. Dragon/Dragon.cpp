@@ -19,9 +19,10 @@ int main () {
     sort(p, p+n, sorter);
 
     for (int i = 0; i < n; i++) {
-        if (s > p[i].first) s += p[i].second;
-        else {
-            cout << "NO";
+        if (s > p[i].first) {
+            s += p[i].second;
+        } else {
+            cout << "NO" << '\n' << n-i;
             return 0;
         }
     }
