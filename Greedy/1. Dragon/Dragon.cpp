@@ -10,6 +10,8 @@ bool sorter (pair <long long, long long> a, pair <long long, long long> b) {
 
 int main () {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    freopen("Dragon.inp", "r", stdin);
+    freopen("Dragon.out", "w", stdout);
     cin >> s >> n;
 
     for (int i = 0; i < n; i++) cin >> p[i].first >> p[i].second;
