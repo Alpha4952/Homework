@@ -3,10 +3,10 @@ using namespace std;
 
 long long n, m, a[501][501], res, t[501];
 
-long long heh (long long *a){
+long long heh (long long *a) {
 	long long m = 0, r = res;
 
-	for (long long i = 0; i < n; i++){
+	for (long long i = 0; i < n; i++) {
 		m += a[i];
 		r = max(r, m);
 		m = max(0LL, m);
