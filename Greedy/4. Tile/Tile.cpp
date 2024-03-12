@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long n, possible, arr[100001], stacked;
+long long n, possible, arr[101], arr2[202], t;
 
 bool sorter (long long a, long long b) {
     return a > b;
@@ -13,12 +13,35 @@ int main () {
     //freopen("Tile.out", "w", stdout);
     
     cin >> n;
-    for (int i = 0; i < n; i++) cin >> arr[i];
-    sort(arr, arr+n, sorter);
 
-    for (int i = 0; i <= min(possible, n-1); i++) {
-        possible = arr[i] + 1 - stacked;
-        stacked++;
+    if (n == 0) {
+        cout << 0;
+        return 0;
     }
-    cout << stacked;
+
+    for (int i = 1; i <= n; i++) cin >> arr[i];
+    sort(arr+1, arr+n+1, sorter);
+
+    for (int i = 1; i <= n; i++) {
+        arr2[arr[i]+i] = 1;
+    }
+
+    for (long long i = 1; i <= 200; i++) {
+        if (arr2[i]) {
+            cout << min(i, n);
+            return 0;
+        }
+    }
 }
+/*
+100
+100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 
+100 100 100 100 100 100 100 100 100 100 */
