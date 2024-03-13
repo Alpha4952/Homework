@@ -21,10 +21,8 @@ int main () {
         else if (c == 1) g1++;
     }
 
-    if (g3 >= g1) {
-        t += g3;
-        g1 = 0;
-    } else g1 -= g3;
+    t += g3;
+    g1 = max(0, g1-g3);
 
     while (g2 >= 2) {
         t++;
