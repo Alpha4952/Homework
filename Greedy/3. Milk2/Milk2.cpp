@@ -17,7 +17,7 @@ int main () {
     sort(a, a+n, sorter);
 
     for (int i = 0; i < n; i++) {
-        if (a[i] - i == 0) break;
+        if (a[i] - i <= 0) break;
         m += a[i]-i;
     }
 
