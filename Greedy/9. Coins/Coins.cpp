@@ -21,7 +21,7 @@ int main () {
     for (int i = 0; i < r; i++) {
         if (coins < ravens[i].second - ravens[i].first) {
             cout << coins;
-            return 1;
+            return 0;
         }
 
         coins += ravens[i].first;

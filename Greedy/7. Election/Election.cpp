@@ -19,7 +19,7 @@ int main () {
     for (int i = 0; i < outlets; i++) {
         if (currentOutlets >= devices) {
             cout << i;
-            return 1;
+            return 0;
         }
         currentOutlets += o[i]-1;
     }

@@ -20,7 +20,7 @@ int main () {
 
     if (n < 10) {
         cout << 1 << n;
-        return 1;
+        return 0;
     }
     if (prime(n)) {
         cout << -1;
@@ -33,5 +33,6 @@ int main () {
             a[i]++;
         }
     }
-    for (int i = 1; i <= 9; i++) if (a[i]) for (int j = 0; j < a[i]; j++) cout << i;
+    if (n > 9) cout << -1;
+    else for (int i = 1; i <= 9; i++) if (a[i]) for (int j = 0; j < a[i]; j++) cout << i;
 }
