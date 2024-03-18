@@ -12,10 +12,9 @@ int main () {
     freopen("BusDriver.inp", "r", stdin);
     freopen("BusDriver.out", "w", stdout);
     
-    while (1) {
-        cin >> n >> d >> r;
+    while (cin >> n >> d >> r) {
         ot = 0;
-        if (n == 0 && d == 0 && r == 0) return 1;
+        if (n == 0 && d == 0 && r == 0) break;
 
         for (int i = 0; i < n; i++) cin >> day[i];
         for (int i = 0; i < n; i++) cin >> night[i];
@@ -24,10 +23,12 @@ int main () {
         sort(night, night+n, sorter);
         fill(wtime, wtime+n, d);
 
-        for (int i = 0; i < n; i++) wtime[i] -= (day[i] + night[i]);
         for (int i = 0; i < n; i++) {
-            ot += -wtime[i];
+            wtime[i] -= day[i] + night[i];
         }
-        cout << ot*r << '\n';
+        for (int i = 0; i < n; i++) {
+            ot += max(0LL, -wtime[i])*r;
+        }
+        cout << ot << '\n';
     }
 }

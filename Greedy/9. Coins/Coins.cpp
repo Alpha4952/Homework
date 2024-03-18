@@ -5,7 +5,7 @@ int r, coins;
 pair <int, int> ravens[1001];
 
 bool sorter (pair <int, int> a, pair <int, int> b) {
-    return (a.second - a.first) < (b.second - b.second);
+    return (a.second - a.first) < (b.second - b.first);
 }
 
 int main () {
