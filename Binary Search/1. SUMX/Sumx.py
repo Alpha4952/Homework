@@ -1,6 +1,6 @@
 import sys
 sys.stdin = open('Sumx.inp', 'r')
-#sys.stdout = open('Sumx.out', 'w')
+sys.stdout = open('Sumx.out', 'w')
 
 m, n, x = map(int, input().split())
 a = list(map(int, input().split()))
@@ -41,11 +41,12 @@ def binary_search(target: int, array: list):
             end = mid
     return -1
 
-r = 0; ia = 0
+r = 0; ia = 0; ifa = 0
 while ia < len(a):
     mi = binary_search(x-a[ia], b)
     if mi > -1:
-        r += fa[ia]*fb[mi]
-    ia += fa[ia]
+        r += fa[ifa]*fb[mi]
+    ia += fa[ifa]
+    ifa += 1
 
 print(r)
