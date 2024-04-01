@@ -1,17 +1,28 @@
-import sys, bisect
+import sys
 sys.stdin = open('ESEQ.inp', 'r')
 sys.stdout = open('ESEQ.out', 'w')
 
 n = int(input())
-a = [0] + list(map(int, input().split()))
+a = list(map(int, input().split()))
 
-for i in range(1, n+1):
-    a[i] += a[i-1]
+psum = 0
+ssum = sum(a)
+prefix_sums = {}
 
 res = 0
-for i in range(1, n+1):
-    r = bisect.bisect_right(a, a[n] - a[i], i+1)
-    l = bisect.bisect_left(a, a[n] - a[i], i+1)
-    res += l - r + 1
 
-print(res)
+for i in range(n):
+    psum += a[i]
+
+    try:
+        res += prefix_sums[ssum]
+    except:
+        res = res
+
+    try:
+        prefix_sums[psum] += 1
+    except:
+        prefix_sums[psum] = 1
+    ssum -= a[i]
+
+print(res % pow(2, 32))
