@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long n, a[100001], b[100001], r, tar;
+long long n, a[100001], b[100001], r = 1e12, tar;
 
 int main () {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -16,8 +16,8 @@ int main () {
     sort(b, b+n);
 
     for (int i = 0; i < n; i++) {
-        tar = lower_bound(b, b+n, -a[i]) - a - 1;
-        r += min(min(r, abs(a[i] + b[tar])), abs(a[i] + b[tar+1]));
+        tar = lower_bound(b, b+n, -a[i]) - b;
+        r = min(min(r, abs(a[i] + b[tar])), min(abs(a[i] + b[tar+1]), abs(a[i] + b[tar-1])));
     }
     cout << r;
 }
