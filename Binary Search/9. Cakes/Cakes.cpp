@@ -1,18 +1,29 @@
 #include <bits/stdc++.h>
-using namespace std;
 
-long long n, t, a[21];
+long long n, m, low, high, mid, res, a[21];
 
-int main () {
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    freopen("Cakes.inp", "r", stdin);
-    freopen("Cakes.out", "w", stdout);
+bool check (long long x) {
+    long long t = 0;
+    for (int i = 1; i <= n; i++) t += x / a[i];
+    return t >= m;
+}
 
-    cin >> n >> t;
-    for (int i = 0; i < t; i++) cin >> a[i];
-    sort(a, a+t);
+int main() {
+    std::ios_base::sync_with_stdio(0), std::cin.tie(0), std::cout.tie(0);
+    freopen("CAKEs.INP", "r", stdin);
+    freopen("CAKEs.OUT", "w", stdout);
+    std::cin >> m >> n;
 
-    
+    for (int i = 1; i <= n; i++) std::cin >> a[i];
+    std::sort(a + 1, a + n + 1);
 
-    return 0;
+    high = a[n] * m;
+    while (low <= high) {
+        mid = (low + high) / 2;
+        if (check(mid)) { //mid is higher than the actual time
+            res = mid;
+            high = mid - 1;
+        } else low = mid + 1;
+    }
+    std::cout << res;
 }

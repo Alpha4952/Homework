@@ -20,9 +20,9 @@ int main () {
         if (abs(fs - m - ss - m) < dif) {
             m--;
             dif = abs(fs - m - ss - m);
-        } else if (abs(fs + m + 1 - ss + m - 1) < dif) {
+        } else if (abs(fs + m - ss + m) < dif) {
             m++;
-            dif = abs(fs + m + 1 - ss + m - 1);
+            dif = abs(fs + m - ss + m);
         } else break;
     }
     cout << m;
