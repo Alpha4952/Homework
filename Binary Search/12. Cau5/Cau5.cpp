@@ -28,8 +28,8 @@ int main() {
             r1 += f - j - 1;
             if (a[f] == tar) r2++;
             if (a[f2] == tar2 && f != f2) r2++;
-            r3 += l - f2 + f - f2;
-            //std::cout << i << " " << j << " " << tar << " " << f << " " << tar2 << " " << f2 << std::endl;
+            r3 += l - f2 + (f - f2)*(a[f] > tar && a[f2] > tar2);
+            //std::cout << i << " " << j << " " << tar << " " << f << " " << tar2 << " " << f2 << " " << l << std::endl;
         }
     }
     std::cout << r1 << " " << r2 << " " << r3 << std::endl;
