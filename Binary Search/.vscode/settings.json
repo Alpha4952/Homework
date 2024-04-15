@@ -92,5 +92,6 @@
         "valarray": "cpp",
         "variant": "cpp"
     },
-    "files.restoreUndoStack": false
+    "files.restoreUndoStack": false,
+    "C_Cpp.errorSquiggles": "disabled"
 }

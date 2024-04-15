@@ -1,37 +1,75 @@
-#include <iostream>
-#include <fstream>
-#include <algorithm>
-#include <math.h>
+#include <bits/stdc++.h>
+using namespace std;
+
+int n, x, p1, p2, a[100001], b[100001];
+long long r1, r2, r3;
+
+int s(int x, int l, int r) {
+    int p = -1, d = l, mid;
+    while (l <= r) {
+        mid = (l + r) / 2;
+
+        if (b[mid] < x) {
+            p = mid;
+            l = mid + 1;
+        }
+        else r = mid - 1;
+    }
+    if (p >= d) return p - d + 1;
+    return 0;
+}
+
+int p(int x, int l, int r) {
+    int p = n + 1, c = r, mid;
+    while (l <= r) {
+        mid = (l + r) / 2;
+
+        if (x < b[mid]) {
+            p = mid;
+            r = mid - 1;
+        }
+        else l = mid + 1;
+    }
+    if (p <= c) return c - p + 1;
+    return 0;
+}
+
+int r(int x, int p1, int p2) {
+    int x1 = lower_bound(b + p1, b + p2, x) - b;
+    int x2 = upper_bound(b + p1, b + p2, x) - b - 1;
+    if (b[x1] == x && x2 >= x1) return x2 - x1 + 1;
+    return 0;
+}
 
 int main() {
-    std::ios_base::sync_with_stdio(NULL); std::cin.tie(NULL); std::cout.tie(NULL);
-    std::freopen("Cau5.inp", "r", stdin);
-    std::freopen("Cau5.out", "w", stdout);
+    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    freopen("cau5.inp", "r", stdin);
+    freopen("cau5.out", "w", stdout);
 
-    long long n, a[100001], r1 = 0, r2 = 0, r3 = 0, f, f2, l, twoS;
-    double tar, tar2;
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i];
+    sort(a, a + n);
 
-    std::cin >> n;
-    for (int i = 0; i < n; i++) std::cin >> a[i];
-    std::sort(a, a + n);
+    a[n] = 1e4;
+    n++;
 
-    for (int i = 0; i < n - 2; i++) {
-        for (int j = i + 1; j < n - 1; j++) {
-            tar = std::sqrt(a[i] * a[i] + a[j] * a[j]);
-            tar2 = std::sqrt(std::pow(std::max(a[i], a[j]), 2) - std::pow(std::min(a[i], a[j]), 2));
-            twoS = a[i] + a[j];
+    for (int i = 0; i < n; i++) b[i] = a[i] * a[i];
 
-            f = std::lower_bound(a + j + 1, a + n, tar) - a;
-            f2 = std::lower_bound(a + j + 1, a + n, tar2) - a;
-            l = std::min(n-1, std::lower_bound(a + j + 1, a + n, twoS-1) - a);
+    for (int i = 0; i < n - 3; i++) {
+        for (int j = i + 1; j < n - 2; j++) {
+            p1 = upper_bound(a + j + 1, a + n, a[i] - a[j]) - a;
+            p2 = lower_bound(a + j + 1, a + n, a[i] + a[j]) - a - 1;
 
-            r1 += f - j - 1;
-            if (a[f] == tar) r2++;
-            if (a[f2] == tar2 && f != f2) r2++;
-            r3 += l - f2 + (f - f2)*(a[f] > tar && a[f2] > tar2);
-            //std::cout << i << " " << j << " " << tar << " " << f << " " << tar2 << " " << f2 << " " << l << std::endl;
+            if (p1 <= p2 && p2 > j) {
+                x = b[i] + b[j];
+
+                r1 += s(x, p1, p2);
+                r2 += r(x, p1, p2 + 1);
+                r3 += p(x, p1, p2);
+            }
         }
     }
-    std::cout << r1 << " " << r2 << " " << r3 << std::endl;
+
+    cout << r1 << " " << r2 << " " << r3 << endl;
     return 0;
 }
