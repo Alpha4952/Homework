@@ -41,7 +41,7 @@ int main() {
     sort(posb.begin(), posb.end(), sortr);
 
     cura = 0; curb = 0;
-    while (cura < negal & curb < posbl) {
+    while (cura < negal && curb < posbl) {
         if (-nega[cura] > posb[curb]) {
             r++;
             cura++;
@@ -52,7 +52,7 @@ int main() {
     }
 
     cura = 0; curb = 0;
-    while (cura < posal & curb < negbl) {
+    while (cura < posal && curb < negbl) {
         if (-negb[curb] > posa[cura]) {
             r++;
             cura++;

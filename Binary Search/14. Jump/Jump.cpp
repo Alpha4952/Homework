@@ -1,36 +1,28 @@
-#include <iostream>
-#include <fstream>
-#include <algorithm>
+#include <bits/stdc++.h>
+using namespace std;
 
-bool eh(std::pair <int, int> b, std::pair <int, int> c) {
-    return b.first < c.first;
+bool sortr (long long a, long long b) {
+    return a > b;
 }
 
 int main() {
-    std::ios_base::sync_with_stdio(NULL); std::cin.tie(NULL); std::cout.tie(NULL);
-    std::freopen("Jump.inp", "r", stdin);
-    std::freopen("Jump.out", "w", stdout);
+    ios_base::sync_with_stdio(NULL); cin.tie(NULL); cout.tie(NULL);
+    freopen("Jump.inp", "r", stdin);
+    freopen("Jump.out", "w", stdout);
 
-    int n, p, interating[100001], sorted[100001], pos;
-    long long r;
-    std::pair <int, int> a[100001];
+    long long n, p, a[100001], r, smol[100001], temporaryValue;
 
-    std::cin >> n >> p;
+    cin >> n >> p;
     for (int i = 0; i < n; i++) {
-        std::cin >> sorted[i];
-        interating[i] = sorted[i];
-        a[i].first = interating[i];
-        a[i].second = i;
+        cin >> a[i];
+        if (i) smol[i] = min(smol[i-1], a[i]);
+        else smol[i] = a[i];
     }
 
-    std::sort(sorted, sorted + n);
-    std::sort(a, a + n, eh);
-
-    sorted[n] = 1e9;
-    n++;
-    for (int i = 0; i < n - 1; i++) {
-        pos = std::upper_bound(sorted + i, sorted + n, interating[i] + p) - sorted - 1;
-        if (sorted[pos] >= interating[i] + p) r = std::max(r, (a[pos].second - i)*1ll);
+    for (long long i = 1; i < n; i++) {
+        temporaryValue = (lower_bound(smol, smol+i-1, a[i] - p, sortr) - smol);
+        if (a[i] - a[temporaryValue] >= p) r = max(r, i - temporaryValue);
     }
-    std::cout << std::max(0ll, r);
+    cout << r << endl;
+    return 0;
 }
