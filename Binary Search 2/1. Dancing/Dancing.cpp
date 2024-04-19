@@ -64,7 +64,7 @@ int main() {
     sort(posa + 1, posa + posal + 1);
     sort(nega + 1, nega + negal + 1);
 
-    first = 1, last = posbl;
+    first = 1;
     for (int i = 1; i <= posal; i++) {
         temp = bsearch1(first, negbl, posa[i]);
         if (temp != -1) {
@@ -73,8 +73,9 @@ int main() {
         } else break;
     }
 
+    last = posbl;
     for (int i = negal; i >= 1; i--) {
-        temp = bsear(1, last, nega[i]);
+        temp = bsearch2(1, last, nega[i]);
         if (temp != -1) {
             r++;
             last = temp - 1;

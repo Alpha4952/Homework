@@ -14,7 +14,7 @@ int main() {
     sort(a + 1, a + n + 1);
 
     for (int i = 1; i < n; i++) {
-        r += upper_bound(a + i + 1, a + n + 1, b - a[i]) - lower_bound(a + i + 1, a + n + 1, b - a[i]);
+        r += upper_bound(a + i+1, a + n + 1, b - a[i]) - lower_bound(a + i + 1, a + n + 1, b - a[i]);
     }
     cout << r << endl;
     return 0;
