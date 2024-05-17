@@ -26,4 +26,5 @@ int main() {
 
     a[0] = 0;
     bktrk(0);
+    return 0;
 }
