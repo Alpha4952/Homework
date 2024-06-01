@@ -1,21 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, move[100001];
-stack <int> a[101], b[101], c[101], d[101];
+int n;
 
-void bktrk(int lm1, int lm2, int moves) {
-    if (c->size() == n) {
-        for (int i = 0; i < n; i++) {
-            
-        }
-        return;
-    }
-
-    for (int i = 1; i < 4; i++) {
-        for (int j = 1; j < 4; j++) {
-            if (j == i || (j == lm1 && i == lm2)) continue;
-        }
+void bktrk (int m, string c1, string c2, string c3) {
+    if (m == 1) cout << c1 << "→" << c3 << '\n';
+    else {
+        bktrk(m-1, c1, c2, c3);
+        bktrk(1, c1, c3, c2);
+        bktrk(m-1, c2, c3, c1);
     }
 }
 
@@ -26,10 +19,6 @@ int main() {
 
     cin >> n;
 
-    for (int i = n; i > 0; i--) {
-        a->push(i);
-        d->push(i);
-    }
-
-    bktrk(0, 0, 0);
+    bktrk(n, "A", "B", "C");
+    return 0;
 }
