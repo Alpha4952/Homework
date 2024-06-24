@@ -16,9 +16,8 @@ int main() {
 
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= m; j++) {
-            dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
-            
-            if (a[i] == b[j]) dp[i][j]++;
+            if (a[i] == b[j]) dp[i][j] = dp[i-1][j-1] + 1;
+            else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
         }
     }
 
@@ -36,6 +35,7 @@ int main() {
         i--;
         j--;
     }
+
     cout << dp[n][m] << '\n';
     for (int i = c-1; i >= 0; i--) cout << r1[i] << " ";
     cout << '\n';
