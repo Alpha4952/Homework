@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, a[21];
+int n, a[100];
 
 void bktrk (int k) {
     if (k == n) {
