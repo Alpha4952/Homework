@@ -20,6 +20,6 @@ int main() {
         f2[i] = max(f2[i - 1], f1[i - 1] - a[i]);
     }
 
-    cout << max(f1[n], f2[n]);
+    cout << max(f1[n], f2[n]) << endl;
     return 0;
 }
