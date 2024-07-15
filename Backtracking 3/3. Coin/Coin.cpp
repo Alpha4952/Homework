@@ -1,4 +1,8 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <vector>
+
 using std::cin;
 using std::cout;
 using std::fill;
@@ -7,53 +11,51 @@ using std::pair;
 using std::vector;
 using std::upper_bound;
 
-long long t, n, rule[35], u[35], ma, may, ns, um;
-vector <long long> r14, r30, r14c, r30c;
-vector < pair<long long, long long> > wat14, wat30;
+long long numberOfTests, number, coinValues[35], used[35], result, currentTest, upperBoundFound;
+vector <long long> coinSum_upTo14, coinSum_upTo34, coinSum_upTo14_count, coinSum_upTo34_count;
+vector < pair<long long, long long> > coinSum_upTo14_pair, coinSum_upTo30_pair;
 pair <long long, long long> temp;
 
-void rule14(int crl) {
-    if (crl == 14) {
-        long long v = 0, c = 0;
+void coin14(int currentLength) {
+    if (currentLength == 14) {
+        long long value = 0, numberOfCoins = 0;
         for (int i = 1; i <= 14; i++) {
-            if (u[i]) {
-                c++;
-                v += rule[i];
+            if (used[i]) {
+                numberOfCoins++;
+                value += coinValues[i];
             }
         }
 
-        temp.first = v; temp.second = c;
-        wat14.push_back(temp);
-        //r14.push_back(v); r14c.push_back(c);
+        temp.first = value; temp.second = numberOfCoins;
+        coinSum_upTo14_pair.push_back(temp);
         return;
     }
 
-    u[crl + 1] = 1;
-    rule14(crl + 1);
-    u[crl + 1] = 0;
-    rule14(crl + 1);
+    used[currentLength + 1] = 1;
+    coin14(currentLength + 1);
+    used[currentLength + 1] = 0;
+    coin14(currentLength + 1);
 }
 
-void rule30(int crl) {
-    if (crl == 34) {
-        long long v = 0, c = 0;
+void coin30(int currentLength) {
+    if (currentLength == 34) {
+        long long value = 0, numberOfCoins = 0;
         for (int i = 15; i <= 34; i++) {
-            if (u[i]) {
-                c++;
-                v += rule[i];
+            if (used[i]) {
+                numberOfCoins++;
+                value += coinValues[i];
             }
         }
 
-        temp.first = v; temp.second = c;
-        wat30.push_back(temp);
-        //r30.push_back(v); r30c.push_back(c);
+        temp.first = value; temp.second = numberOfCoins;
+        coinSum_upTo30_pair.push_back(temp);
         return;
     }
 
-    u[crl + 1] = 1;
-    rule30(crl + 1);
-    u[crl + 1] = 0;
-    rule30(crl + 1);
+    used[currentLength + 1] = 1;
+    coin30(currentLength + 1);
+    used[currentLength + 1] = 0;
+    coin30(currentLength + 1);
 }
 
 bool sortr(pair<long long, long long> a, pair<long long, long long> b) {
@@ -66,43 +68,43 @@ int main() {
     freopen("Coin.inp", "r", stdin);
     freopen("Coin.out", "w", stdout);
 
-    rule[1] = 2; rule[2] = 3; rule[3] = 5; rule[4] = 10; rule[5] = 18; rule[6] = 33; rule[7] = 61; rule[8] = 112; rule[9] = 206; rule[10] = 379; rule[11] = 697; rule[12] = 1282; rule[13] = 2358; rule[14] = 4337; rule[15] = 7977; rule[16] = 14672; rule[17] = 26986; rule[18] = 49635; rule[19] = 91293; rule[20] = 167914; rule[21] = 308842; rule[22] = 568049; rule[23] = 1044805; rule[24] = 1921696; rule[25] = 3534550; rule[26] = 6501051; rule[27] = 11957297; rule[28] = 21992898; rule[29] = 40451246; rule[30] = 74401441; rule[31] = 136845585; rule[32] = 251698272; rule[33] = 462945298; rule[34] = 851489155;
-    may = 1;
+    coinValues[1] = 2; coinValues[2] = 3; coinValues[3] = 5; coinValues[4] = 10; coinValues[5] = 18; coinValues[6] = 33; coinValues[7] = 61; coinValues[8] = 112; coinValues[9] = 206; coinValues[10] = 379; coinValues[11] = 697; coinValues[12] = 1282; coinValues[13] = 2358; coinValues[14] = 4337; coinValues[15] = 7977; coinValues[16] = 14672; coinValues[17] = 26986; coinValues[18] = 49635; coinValues[19] = 91293; coinValues[20] = 167914; coinValues[21] = 308842; coinValues[22] = 568049; coinValues[23] = 1044805; coinValues[24] = 1921696; coinValues[25] = 3534550; coinValues[26] = 6501051; coinValues[27] = 11957297; coinValues[28] = 21992898; coinValues[29] = 40451246; coinValues[30] = 74401441; coinValues[31] = 136845585; coinValues[32] = 251698272; coinValues[33] = 462945298; coinValues[34] = 851489155;
+    currentTest = 1;
 
-    fill(u, u + 15, 0);
-    rule14(0);
-    sort(wat14.begin(), wat14.end(), sortr);
-    for (int i = 0; i < wat14.size(); i++) {
-        r14.push_back(wat14[i].first);
-        r14c.push_back(wat14[i].second);
+    fill(used, used + 15, 0);
+    coin14(0);
+    sort(coinSum_upTo14_pair.begin(), coinSum_upTo14_pair.end(), sortr);
+    for (int i = 0; i < coinSum_upTo14_pair.size(); i++) {
+        coinSum_upTo14.push_back(coinSum_upTo14_pair[i].first);
+        coinSum_upTo14_count.push_back(coinSum_upTo14_pair[i].second);
     }
 
-    fill(u, u + 35, 0);
-    rule30(14);
-    sort(wat30.begin(), wat30.end(), sortr);
-    for (int i = 0; i < wat30.size(); i++) {
-        r30.push_back(wat30[i].first);
-        r30c.push_back(wat30[i].second);
+    fill(used, used + 35, 0);
+    coin30(14);
+    sort(coinSum_upTo30_pair.begin(), coinSum_upTo30_pair.end(), sortr);
+    for (int i = 0; i < coinSum_upTo30_pair.size(); i++) {
+        coinSum_upTo34.push_back(coinSum_upTo30_pair[i].first);
+        coinSum_upTo34_count.push_back(coinSum_upTo30_pair[i].second);
     }
 
-    cin >> t;
-    while (may <= t) {
-        cin >> n;
+    cin >> numberOfTests;
+    while (currentTest <= numberOfTests) {
+        cin >> number;
 
-        fill(u, u + 35, 0);
-        ma = -1;
+        fill(used, used + 35, 0);
+        result = -1;
 
-        for (int i = 0; i < r14.size(); i++) {
-            if (r14[i] > n) break;
-            um = upper_bound(r30.begin(), r30.end(), n - r14[i]) - r30.begin() - 1;
+        for (int i = 0; i < coinSum_upTo14.size(); i++) {
+            if (coinSum_upTo14[i] > number) break;
+            upperBoundFound = upper_bound(coinSum_upTo34.begin(), coinSum_upTo34.end(), number - coinSum_upTo14[i]) - coinSum_upTo34.begin() - 1;
 
-            if (r30[um] + r14[i] == n) {
-                ma = max(ma, r14c[i] + r30c[um]);
+            if (coinSum_upTo34[upperBoundFound] + coinSum_upTo14[i] == number) {
+                result = max(result, coinSum_upTo14_count[i] + coinSum_upTo34_count[upperBoundFound]);
             }
         }
 
-        cout << "Case #" << may << ": " << ma << '\n';
-        may++;
+        cout << "Case #" << currentTest << ": " << result << '\n';
+        currentTest++;
     }
 
     return 0;
