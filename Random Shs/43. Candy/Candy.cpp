@@ -1,37 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long n, m, st, en;
-vector<long long> a(1000001), cl(1000001), index(1000001);
+long long n, m, a[105], r, ans;
 
 int main() {
-    ios_base::sync_with_stdio(NULL); std::cin.tie(NULL); std::cout.tie(NULL);
+    ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     freopen("Candy.inp", "r", stdin);
     freopen("Candy.out", "w", stdout);
 
+    r = -1;
+
     cin >> n >> m;
-
-    for (int i = 0; i < n; ++i) {
+    for (int i = 1; i <= n; i++) {
         cin >> a[i];
-    }
-
-    for (int i = 0; i < n; i++) {
-        index[i] = i + 1;
-    }
-
-    st = 0; en = n - 1;
-
-    while (st <= en) {
-        if (cl[st] > m) {
-            cl[st] -= m;
-            en++;
-            index.push_back(index[st]);
-            cl.push_back(cl[st]);
+        if (a[i] / m >= r) {
+            r = a[i] / m;
+            ans = i;
         }
-        st++;
     }
-
-    cout << index[st - 1] << endl;
-
+    cout << ans;
     return 0;
 }

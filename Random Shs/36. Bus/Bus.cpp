@@ -10,17 +10,6 @@ int main() {
 
     cin >> n >> m >> a >> b;
 
-    if (m >= n) {
-        if (b < n * a) cout << b;
-        else cout << n * a;
-    } else {
-        r = n * a;
-
-        if (n % m == 0) r = min(r, (n / m) * b);
-        else {
-            r = min(r, min(((n / m) + 1) * b, (n / m) * b + (n % m) * a));
-        }
-        cout << r << endl;
-    }
+    cout << (min((n/m)*b + min((n%m)*a, b), n*a));
     return 0;
 }
