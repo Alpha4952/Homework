@@ -1,22 +1,33 @@
 #include <bits/stdc++.h>
-using std::cin;
-using std::cout;
-using std::min;
+using namespace std;
 
-long long dp[51][250], n, k;
+int dp[500][500];
 
 int main() {
-    std::ios_base::sync_with_stdio(NULL); std::cin.tie(NULL); std::cout.tie(NULL);
-    freopen("Exam.inp", "r", stdin);
-    freopen("Exam.out", "w", stdout);
-
+    freopen("exam.inp", "r", stdin);
+    freopen("exam.out", "w", stdout);
+    int n, k;
     cin >> n >> k;
-    for (int i = 1; i <= n; i++) {
-        if (k >= i*2 + (n-i)*3 && k <= i*2 + (n-i)*5) {
-            cout << i << std::endl;
-            return 0;
+    for (int i = 0; i <= n; ++i) {
+        for (int j = 0; j <= k; ++j) {
+            dp[i][j] = 1e9;
         }
     }
-    cout << 0 << std::endl;
+    dp[0][0] = 0;
+    int point[] = {2, 3, 4, 5};
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j <= k; j++) {
+            for (int d = 0; i < 4; i++) {
+                if (j >= d && dp[i - 1][j - d] != 1e9) {
+                    int dem = dp[i - 1][j - d] + (d == 2 ? 1 : 0);
+                    dp[i][j] = min(dp[i][j], dem);
+                }
+            }
+        }
+    }
+
+    if (dp[n][k] == 1e9) cout << 0 << endl;
+    else cout << dp[n][k] << endl;
     return 0;
 }

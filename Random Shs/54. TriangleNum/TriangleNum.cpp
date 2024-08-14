@@ -12,7 +12,7 @@ int main() {
     freopen("TriangleNum.out", "w", stdout);
 
     for (int i = 1; i <= 14143; i++) {
-        wat.push_back(i*(i-1)/2);
+        wat.push_back(i*(i+1)/2);
     }
 
     //cout << wat[wat.size() - 1] << '\n';
@@ -20,6 +20,10 @@ int main() {
     cin >> t;
     for (int i = 0; i < t; i++) {
         cin >> n;
+        if (n <= 1) {
+            cout << "NO" << '\n';
+            continue;
+        }
         for (int i = 0; i < 14143; i++) {
             if (wat[i] >= n) {
                 cout << "NO" << '\n';
