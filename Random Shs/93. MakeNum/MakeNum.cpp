@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long t, n, a[100001], c;
+long long t, n, a[100001], c, hmmmm;
 string r;
 vector <long long> n1, n2;
 
@@ -46,7 +46,12 @@ int main() {
             r += "1";
         }
 
-        for (int i = r.length() - 1; i >= 0; i--) cout << r[i];
+        hmmmm = 1;
+        for (int i = r.length() - 1; i >= 0; i--) {
+            hmmmm = 0;
+            cout << r[i];
+        }
+        if (hmmmm) cout << 0;
         cout << '\n';
     }
 }

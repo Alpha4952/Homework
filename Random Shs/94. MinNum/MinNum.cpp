@@ -16,6 +16,10 @@ int main() {
             cout << -1 << '\n';
             continue;
         }
+        if (d == 1) {
+            cout << s << '\n';
+            continue;
+        }
 
         for (int i = 1; i <= 9; i++) {
             if (s - i <= (d-1)*9) {
