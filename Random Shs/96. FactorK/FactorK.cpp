@@ -25,8 +25,8 @@ int main() {
             }
         }
 
-        factors.push_back(n);
-
+        if (n > 1) factors.push_back(n);
+        //for (int i = 0; i < factors.size(); i++) cout << factors[i] << " ";
         if (factors.size() < k) cout << -1 << '\n';
         else cout << factors[k - 1] << '\n';
     }

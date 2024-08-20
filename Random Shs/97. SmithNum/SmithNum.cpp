@@ -1,14 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long t, n, k, hm, p, pp, hmm;
-vector <long long> prime(50000001);
+long long t, n, k, hm, p, pp, hmm, damn[1000001], prime[5000001];
 
 void sieve() {
-    fill(prime.begin(), prime.end(), 1);
-    for (int i = 3; i * i <= 100000000; i += 2) {
+    fill(prime, prime + 5000001, 1);
+    for (int i = 3; i * i <= 10000000; i += 2) {
         long long k = (i + 1) / 2;
-        if (prime[k]) for (int j = i * i; j <= 100000000; j += 2 * i) prime[(j + 1) / 2] = 0;
+        if (prime[k]) for (int j = i * i; j <= 10000000; j += 2 * i) prime[(j + 1) / 2] = 0;
     }
 }
 
@@ -21,7 +20,7 @@ bool check(long long n) {
 }
 
 bool acheck(long long n) {
-    if (n <= 1e8) return check(n);
+    if (n <= 1e7) return check(n);
     else {
         long long hm = sqrt(n);
         for (int i = 2; i <= hm; i++) {
@@ -32,13 +31,19 @@ bool acheck(long long n) {
 }
 
 long long s(long long n) {
-    long long r;
+    long long r, hmm;
 
+    if (n <= 1e6) if (damn[n] != -1) return damn[n];
+
+    hmm = n;
     r = 0;
+
     while (n) {
         r += n % 10;
         n /= 10;
     }
+
+    if (hmm <= 1e6) damn[hmm] = r;
 
     return r;
 }
@@ -50,6 +55,8 @@ int main() {
 
     sieve();
 
+    fill(damn, damn + 1000001, -1);
+
     cin >> t;
     while (t--) {
         cin >> n;
@@ -58,6 +65,8 @@ int main() {
             cout << 0 << '\n';
             continue;
         }
+
+        //cout << "checked" << '\n';
 
         hm = sqrt(n);
         p = s(n);
@@ -70,17 +79,19 @@ int main() {
             if (n % i) continue;
 
             while (n % i == 0) {
-        //        f.push_back(i);//
+                //f.push_back(i);//
 
                 pp += s(i);
+                //cout << pp << " ";
                 n /= i;
             }
         }
         if (n > 1) {
-        //    f.push_back(n);
+            //f.push_back(n);
             pp += s(n);
         }
 
+        //cout << '\n';
         //for (int i = 0; i < f.size(); i++) cout << f[i] << " ";
         cout << (p == pp) << '\n';// << " " << p << " " << pp << '\n' << '\n';
     }

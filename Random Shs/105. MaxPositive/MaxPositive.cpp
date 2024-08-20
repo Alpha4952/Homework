@@ -19,6 +19,6 @@ int main() {
     while (t--) {
         cin >> x;
 
-        cout << lower_bound(damn + 1, damn + 1000001, x) - damn << '\n';
+        cout << lower_bound(damn + 1, damn + 68100001, x) - damn << '\n';
     }
 }
