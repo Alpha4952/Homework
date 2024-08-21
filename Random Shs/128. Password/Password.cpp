@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long n, r1, r2, r3, j, k;
+long long S = 0, n, l, x, y, z;
+vector<long long> s1, s2, s3;
 string s;
 
 int main() {
@@ -9,48 +10,40 @@ int main() {
     freopen("Password.inp", "r", stdin);
     freopen("Password.out", "w", stdout);
 
-    r1 = 0; r2 = 0; r3 = 0; n = 0;
+    l = 0;
 
     cin >> s;
-    for (int i = 0; i < s.length(); i++) {
-        if (s[i] >= 'a' && s[i] <= 'z') r1++;
-        else if (s[i] >= 'A' && s[i] <= 'Z') r2++;
-        else if (s[i] >= '0' && s[i] <= '9') r3++;
 
-        if (r1 && r2 && r3) {
-            j = i;
-            n = s.length() - i;
-            break;
+    n = s.length();
+
+    s1.push_back(0);
+    s2.push_back(0);
+    s3.push_back(0);
+
+    if (n < 5) cout << 0;
+    else {
+        for (long long i = 1;i <= n;i++) {
+            s1.push_back(s1[i - 1]);
+            s2.push_back(s2[i - 1]);
+            s3.push_back(s3[i - 1]);
+
+            if (s[i - 1] >= 'a' && s[i - 1] <= 'z') s1[i]++;
+            if (s[i - 1] >= 'A' && s[i - 1] <= 'Z') s2[i]++;
+            if (s[i - 1] >= '0' && s[i - 1] <= '9') s3[i]++;
         }
-    }
 
-    k = 0;
-    while (1) {
-        if (s[k] >= 'a' && s[k] <= 'z') r1--;
-        else if (s[k] >= 'A' && s[k] <= 'Z') r2--;
-        else if (s[k] >= '0' && s[k] <= '9') r3--;
+        for (long long i = 6;i <= n;i++) {
+            x = s1[i] - s1[l];
+            y = s2[i] - s2[l];
+            z = s3[i] - s3[l];
 
-        if (!r1 || !r2 || !r3) {
-            for (int i = j; i < s.length(); i++) {
-                if (s[i] >= 'a' && s[i] <= 'z') r1++;
-                else if (s[i] >= 'A' && s[i] <= 'Z') r2++;
-                else if (s[i] >= '0' && s[i] <= '9') r3++;
-
-                if (r1 && r2 && r3) {
-                    j = i;
-                    n += s.length() - i;
-                    break;
-                }
+            while (x && y && z && (i - l) >= 6) {
+                l++;
+                x = s1[i] - s1[l], y = s2[i] - s2[l], z = s3[i] - s3[l];
             }
-            if (!r1 || !r2 || !r3) break;
-        } else {
-            n += s.length() - j;
-            k++;
-        }
-        //cout << k << " " << j << " " << n << " " << r1 << " " << r2 << " " << r3 << endl;
-        if (j == s.length() - 1 || k >= j) break;
-    }
+            S += l;
 
-    cout << n << endl;
-    return 0;
+        }
+        cout << S;
+    }
 }

@@ -2,6 +2,7 @@
 using namespace std;
 
 long long t, n, a[3], b[3], mirror[3], moves[3], h, r;
+double hmm;
 string megatron;
 
 int main() {
@@ -12,8 +13,10 @@ int main() {
     cin >> t;
     while (t--) {
         cin >> n;
-        for (int i = 0; i < n; i++) cin >> a[i];
+        for (int i = 0; i < 3; i++) cin >> a[i];
         cin >> megatron;
+
+        hmm = (float) n/2;
 
         r = 0;
         fill(b, b + 3, 0);
@@ -23,7 +26,7 @@ int main() {
                 b[0]++;
             } else if (megatron[i] == 'P') {
                 b[1]++;
-            } else if (megatron[i] == 'R') {
+            } else if (megatron[i] == 'S') {
                 b[2]++;
             }
         }
@@ -63,9 +66,10 @@ int main() {
             a[2] = 0;
         }
 
-        if (r >= n / 2) {
+        if (r >= hmm) {
             cout << "YES" << '\n';
 
+            //cout << megatron.length() << " " << megatron << '\n';
             for (int i = 0; i < megatron.length(); i++) {
                 if (megatron[i] == 'R') {
                     if (mirror[1]) {

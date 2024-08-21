@@ -13,7 +13,10 @@ int main() {
     while (t--) {
         cin >> n >> k >> s;
 
-        if (k == 0) cout << s << '\n';
+        if (k == 0) {
+            cout << s << '\n';
+            continue;
+        }
 
         if (s.length() == 1) {
             if (k) cout << 0 << '\n';
