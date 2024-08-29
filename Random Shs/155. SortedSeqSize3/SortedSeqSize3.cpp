@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long t, n, a[100001], b[100001], uhm;
+long long t, n, uhm, minv, maxv;
 
 int main() {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -12,15 +12,26 @@ int main() {
     while (t--) {
         cin >> n;
 
-        b[1] = 1; uhm = 0;
-        for (int i = 1; i <= n; i++) {
+        vector <long long> a(n), smol(n, -1), huge(n, -1);
+        for (int i = 0; i < n; i++) {
             cin >> a[i];
-            b[i] = 1;
+        }
 
-            for (int j = 1; j < i; j++) {
-                if (a[j] < a[i]) b[i] = max(b[i], b[j] + 1);
-            }
-            if (b[i] == 3) {
+        minv = 0; maxv = n-1;
+
+        for (int i = 0; i < n; i++) {
+            if (a[i] <= a[minv]) minv = i;
+            else smol[i] = minv;
+        }
+
+        for (int i = n-1; i >= 0; i--) {
+            if (a[i] >= a[maxv]) maxv = i;
+            else huge[i] = maxv;
+        }
+
+        uhm = 0;
+        for (int i = 0; i < n; i++) {
+            if (smol[i] != -1 && huge[i] != -1) {
                 uhm = 1;
                 break;
             }

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long t, n, a[1000001], sf[1000001], sl[1000001];
+long long t, n, a[1000001], sf[1000001], sl[1000001], uh;
 
 int main() {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -12,7 +12,7 @@ int main() {
     while (t--) {
         cin >> n;
 
-        sf[0] = 0;
+        sf[0] = 0; uh = 1;
         for (int i = 1; i <= n; i++) {
             cin >> a[i];
             sf[i] = sf[i-1] + a[i];
@@ -26,8 +26,11 @@ int main() {
         for (int i = 1; i <= n; i++) {
             if (sf[i] == sl[i]) {
                 cout << i << '\n';
+                uh = 0;
                 break;
             }
         }
+
+        if (uh) cout << -1 << '\n';
     }
 }
