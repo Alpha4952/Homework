@@ -20,6 +20,7 @@ void search(long long start) {
             found = 1;
         }
 
+        if (!found) depth++;
         search(a[start][i]);
     }
 }

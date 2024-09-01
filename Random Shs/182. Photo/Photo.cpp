@@ -16,27 +16,15 @@ int main() {
     }
     l[1] = 0; r[n] = 0;
 
-    //for (int i = 1; i <= n; i++) cout << l[i] << " " << r[i] << '\n';
-    //cout << '\n';
-
     for (int i = 0; i < m; i++) {
         cin >> out >> in;
-        lout = l[out];
-        lin = l[in];
-        rout = r[out];
-        rin = r[in];
 
-        r[lout] = r[out];
-        l[rout] = l[out];
-        r[lin] = out;
-        l[in] = out;
-        l[out] = lin;
+        if (l[out] != 0) r[l[out]] = r[out];
+        if (r[out] != 0) l[r[out]] = l[out];
+        r[l[in]] = out;
+        l[out] = l[in];
         r[out] = in;
-
-        //for (int i = 1; i <= n; i++) {
-        //    cout << l[i] << " " << r[i] << '\n';
-        //}
-        //cout << '\n';
+        l[in] = out;
     }
 
     for (int i = 1; i <= n; i++) {

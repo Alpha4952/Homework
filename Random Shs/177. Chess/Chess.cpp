@@ -1,33 +1,50 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-long long n, a[100001], b[100001], p, ia, ib;
-
-int main() {
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    freopen("Chess.inp", "r", stdin);
-    freopen("Chess.out", "w", stdout);
-    
+int a[100005],b[100005],dga[100005],dgb[100005];
+int n,kq = 0 ;
+int main()
+{
+    ios_base::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    freopen("CHESS.inp","r",stdin);
+    freopen("CHESS.out","w",stdout);
     cin >> n;
-    for (int i = 0; i < n; i++) cin >> a[i] >> b[i];
-    //for (int i = 0; i < n; i++) cin >> b[i];
-
-    sort(a, a + n);
-    sort(b, b + n);
-
-    p = 0; ia = n-1; ib = n-1;
-    while (a[ia] > b[ib]) {
-        ia--;
-        if (ia < 0) break;
+    for ( int i = 1 ; i <= n ; i++)
+    {
+        cin >> a[i] >> b[i];
+        dga[i] = 0;
+        dgb[i] = 0;
     }
-    while (ia >= 0 && ib >= 0) {
-        if (a[ia] < b[ib]) {
-            p += 2;
-        } else if (a[ia] == b[ib]) {
-            p++;
+    sort (a+1,a+n+1);
+    sort (b+1,b+n+1);
+    for (int i = 1 ; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            if (dgb[j] == 0 && a[i] < b[j])
+            {
+                dga[i] = 1;
+                dgb[j] = 1;
+                kq += 2;
+                break;
+            }
         }
-        ia--; ib--;
     }
-
-    cout << p << endl;
+    for (int j = 1 ; j <= n ; j++)
+    {
+        if ( dgb[j] == 0)
+        {
+            for (int i = 1 ; i <= n ; i ++)
+            {
+                if (dga[i]==0 && a[i]==b[j])
+                {
+                    dga[i] = 1;
+                    dgb[j] = 1;
+                    kq ++;
+                    break;
+                }
+            }
+        }
+    }
+    cout << kq;
+    return 0;
 }

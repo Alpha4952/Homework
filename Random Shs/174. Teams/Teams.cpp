@@ -26,6 +26,7 @@ int main() {
     }
 
     t = min(c[1], min(c[2], c[3]));
+    
     cout << t << '\n';
     for (int i = 0; i < t; i++) {
         cout << t1[i] << " " << t2[i] << " " << t3[i] << '\n';

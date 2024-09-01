@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long n, a[100001], maxc, minc;
+long long n, a[200002], maxc, minc;
 
 int main() {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -26,7 +26,7 @@ int main() {
 
         cout << a[n-1] - a[0] << " " << maxc * minc << endl;
     } else {
-        cout << 0 << " " << n * n - 1 << endl;
+        cout << 0 << " " << n * (n - 1)/2 << endl;
     }
 
     return 0;
