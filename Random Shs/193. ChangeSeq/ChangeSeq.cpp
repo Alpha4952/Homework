@@ -30,7 +30,7 @@ int main() {
         //for (int i = 0; i < n; i++) cout << b[i] << " ";
         //cout << '\n';
 
-        l = -1; r = -1;
+        l = -1; r = -1; diff = 0;
         for (int i = 0; i < n; i++) {
             if (b[i]) {
                 diff = b[i];

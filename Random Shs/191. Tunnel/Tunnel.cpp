@@ -1,40 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long n, temp, c, ii, io, hmm[100001];
-vector <long long> in, out;
+long long n, c, maxPos, a[1000001], b[1000001], pos[1000001];
 
 int main() {
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    freopen("Tunnel.inp", "r", stdin);
-    freopen("Tunnel.out", "w", stdout);
-    
+    freopen("tunnel.inp", "r", stdin);
+    freopen("tunnel.out", "w", stdout);
+
     cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i];
+
     for (int i = 0; i < n; i++) {
-        cin >> temp;
-        in.push_back(temp);
-    }
-    for (int i = 0; i < n; i++) {
-        cin >> temp;
-        out.push_back(temp);
+        cin >> b[i];
+        pos[b[i]] = i;
     }
 
-    c = 0; ii = 0; io = 0;
-    fill(hmm, hmm + 100001, 0);
+    c = 0; maxPos = -1;
 
-    while (ii < n && io < n) {
-        if (hmm[in[ii]]) {
-            ii++;
-        }
-        if (in[ii] != out[io]) {
+    for (int i = 0; i < n; i++) {
+        if (pos[a[i]] < maxPos)
             c++;
-            hmm[out[io]] = 1;
-            io++;
-        } else if (in[ii] == out[io]) {
-            ii++;
-            io++;
-        }
+        else maxPos = pos[a[i]];
     }
-
     cout << c << endl;
+    return 0;
 }
