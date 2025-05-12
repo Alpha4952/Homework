@@ -9,3 +9,5 @@ Although the problems are in Vietnamese, you can use google translate or contact
 Feel free to ask me to explain anything if you want to, I just love doing random ahh things.
 Side note: if you need quick response, check out my discord, I am almost always online, besides sleeping and some personal time
 And check my timezone as well, I usually sleep from 11pm (23) to 6am (6), Sunday to 7 or 8am (7 or 8) and sometimes I stay up late
+
+Ahh and the silly commits, I was just cheering myself after completing a hard task or something. No idea what my past self have been doing then. :D
